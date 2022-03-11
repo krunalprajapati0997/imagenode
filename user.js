@@ -1,8 +1,15 @@
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
-    profile_file: { type: String },
-    profile_path: { type: String } 
+    name:{type:String},
+    username:{type:String},
+    email:{type:String},
+
+    phone:{type:Number},
+    profile_file: { type : String },
+    
+    // profile_file: { type: Array },
+    profile_url: { type: String } 
 })
 
 const User = mongoose.model('User',userSchema)

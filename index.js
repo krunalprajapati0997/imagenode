@@ -12,7 +12,8 @@ console.log('connection succescfull')
 
 const app = express('');
 app.use(cors())
-app.use('/api',appRoutes);
+app.use('/',appRoutes);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/uploads',express.static('uploads'));
@@ -20,7 +21,7 @@ app.use('/uploads',express.static('uploads'));
 
          
      
-app.listen(6001,function(){
+app.listen(6009,function(){
     console.log('port is running');
 })
 
