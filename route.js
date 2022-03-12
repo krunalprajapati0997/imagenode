@@ -60,6 +60,17 @@ module.exports = function(router){
     
     })
 
+    router.get('/:id', (req, res) => {
+        const id=req.params.id
+        User.find({_id: req.params.id}).exec(function (err, ress) {
+            res.json({ 'data': ress , success:true})
+            // fs.unlink("uploads/profile_file_1646730761197.png", function (err) {
+            //     if (err) throw err;
+            //     console.log('filed error')
+            // })
+        })
+    })
+    
     router.get('/', (req, res) => {
         User.find({}).exec(function(err, ress) {
             res.json({"data":ress})
@@ -131,8 +142,13 @@ module.exports = function(router){
     router.put('/:id', upload, async (req, res) => {
 
         User.findOne({_id: req.params.id}).exec((err, user) => {
-            if(err) {
-                console.log(err)
+            if(req.file == null) {
+                user.name = req.body.name;
+                user.username = req.body.username;
+                user.email = req.body.email;
+                user.phone = req.body.phone;
+                user.save();
+                console.log(err);
             } else {
                 user.name = req.body.name;
                 user.username = req.body.username;
@@ -149,7 +165,7 @@ module.exports = function(router){
             }
         })
     
-    
+
     })
 
     router.delete("/:id", async (req, res) => {
